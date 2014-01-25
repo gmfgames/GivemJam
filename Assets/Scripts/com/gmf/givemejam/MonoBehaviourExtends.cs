@@ -9,12 +9,13 @@ public abstract class MonoBehaviourExtends : MonoBehaviour
 	/// <summary>
 	/// Indica se o jogo esta parado ou nao.
 	/// </summary>
-	protected float isPaused
+	protected bool isPaused
 	{
 		get
 		{
 			//TODO verificar o pause
 			//Pause.ispaused
+			return true;
 		}
 	}
 
