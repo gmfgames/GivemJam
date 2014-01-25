@@ -77,7 +77,23 @@ public class PlayerMove : MonoBehaviourExtends
 
 	#endregion
 
+	#region Funçoes
+
+	/**********************************************************
+	 * FUNÇÕES
+	 **********************************************************/ 
+
+	protected void Awake()
+	{	
+		_moveDirection = new Vector3();
+
+		_controller    = GetComponent<Rigidbody2D>();
+
+	}
+
 	public override void onPause(bool pause)
 	{
 	}
+
+	#endregion
 }
