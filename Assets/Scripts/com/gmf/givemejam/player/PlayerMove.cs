@@ -88,12 +88,14 @@ public class PlayerMove : MonoBehaviourExtends
 		_moveDirection = new Vector3();
 
 		_controller    = GetComponent<Rigidbody2D>();
-
 	}
 
-	public override void onPause(bool pause)
+	protected void Move()
 	{
+
 	}
+
+	public override void onPause(bool pause){}
 
 	#endregion
 }
