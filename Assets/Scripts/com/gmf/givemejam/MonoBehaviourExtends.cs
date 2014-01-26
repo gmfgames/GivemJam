@@ -14,7 +14,7 @@ public abstract class MonoBehaviourExtends : MonoBehaviour
 		 * PUBLICAS
 		 **----------------------------------------------------------*/ 
 	
-		protected bool _isEnabled;
+	protected bool _isEnabled = true;
 		/// <summary>
 		/// Propriedade que indica se o componente esta habilitado ou não.
 		/// </summary>
@@ -39,7 +39,7 @@ public abstract class MonoBehaviourExtends : MonoBehaviour
 			{
 				//TODO verificar o pause
 				//Pause.ispaused
-				return true;
+				return false;
 			}
 		}
 
