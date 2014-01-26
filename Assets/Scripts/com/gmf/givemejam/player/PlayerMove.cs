@@ -153,7 +153,7 @@ public class PlayerMove : MonoBehaviourExtends
 
 	#region Eventos
 	/**------------------------------------------------------------
-	 * INTERNAS
+	 * EVENTOS
 	 **----------------------------------------------------------*/
 
 	void LeftButtonPress (object sender, TouchScript.Events.GestureStateChangeEventArgs e)
