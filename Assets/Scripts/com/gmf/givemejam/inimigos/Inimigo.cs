@@ -24,11 +24,12 @@ public class Inimigo : TrackingObject {
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D collider){
+	void OnTriggerStay2D(Collider2D collider){
 		PlayerHealth player = collider.gameObject.GetComponent<PlayerHealth>();
 		if(player){
 			target = player.transform;
 			IsTracking = true;
+			animator.SetBool("IsAttacking", true);
 		}
 	}
 
@@ -36,6 +37,8 @@ public class Inimigo : TrackingObject {
 		PlayerHealth player = collider.gameObject.GetComponent<PlayerHealth>();
 		if(player){
 			IsTracking = false;
+			target = null;
+			animator.SetBool("IsAttacking", false);
 		}
 	}
 }
