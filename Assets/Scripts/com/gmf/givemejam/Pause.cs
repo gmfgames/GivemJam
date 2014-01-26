@@ -24,9 +24,10 @@ public class Pause : MonoBehaviour
 		{
 			get
 			{
-				if(!_instance)
-
-					_instance = new Pause();
+				if(_instance == null)
+				{
+					_instance = GameObject.FindObjectOfType(typeof(Pause)) as Pause;
+				}
 
 				return _instance;
 			}
@@ -61,7 +62,7 @@ public class Pause : MonoBehaviour
 	/**********************************************************
 	 * FUNÇÕES
 	 **********************************************************/ 
-	
+
 	protected void Awake()
 	{
 		if(pauseButton)
@@ -78,7 +79,8 @@ public class Pause : MonoBehaviour
 	{
 		_isPaused = !_isPaused;
 
-		MessageDispatcher.Broadcast<PauseMessage>(new PauseMessage(PauseMessage.ON_PAUSE_CHANGED, _isPaused));
+		MessageDispatcher.Broadcast<PauseMessage>(new PauseMessage(PauseMessage.ON_PAUSE_CHANGED, _isPaused),
+		                                          DispatcherMode.DONT_REQUIRE_LISTENER );
 	}
 
 	#endregion
