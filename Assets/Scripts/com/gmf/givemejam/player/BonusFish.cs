@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-public class BonusFish : MonoBehaviourExtends {
+public class BonusFish : FlipableObject {
 
 	protected override void OnPause (bool isPaused){}
 
@@ -12,7 +12,6 @@ public class BonusFish : MonoBehaviourExtends {
 	public float safeDistance;
 
 	protected Animator animator;
-	public bool isFacingRight;
 
 
 	public enum FishState{
@@ -46,17 +45,7 @@ public class BonusFish : MonoBehaviourExtends {
 			}else{
 				rigidbody2D.velocity = Vector2.zero;
 			}
-
-			if(isFacingRight && rigidbody2D.velocity.x < 0)
-				FlipX();
-			else if(!isFacingRight && rigidbody2D.velocity.x > 0)
-				FlipX();
 		}
-	}
-
-	protected void FlipX(){
-		isFacingRight = !isFacingRight;
-		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){

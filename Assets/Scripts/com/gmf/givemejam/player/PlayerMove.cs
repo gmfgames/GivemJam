@@ -7,7 +7,7 @@ using TouchScript.Gestures;
 /// <summary>
 /// Moveimentaçao do jogador.
 /// </summary>
-public class PlayerMove : MonoBehaviourExtends 
+public class PlayerMove : FlipableObject 
 {
 	#region Properties 
 	/**********************************************************
