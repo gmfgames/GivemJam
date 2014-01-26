@@ -4,8 +4,10 @@ using System.Collections;
 /// <summary>
 /// Componente de camera que segue um alvo.
 /// </summary>
-public class SmoothCamera : MonoBehaviour
+public class SmoothCamera : MonoBehaviourExtends
 {
+	protected override void OnPause (bool isPaused){}
+
 	/**********************************************************
 	 * PROPRIEDADES
 	 **********************************************************/ 

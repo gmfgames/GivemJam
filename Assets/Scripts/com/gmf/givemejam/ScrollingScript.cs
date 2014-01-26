@@ -5,8 +5,10 @@ using UnityEngine;
 /// <summary>
 /// Parallax scrolling script that should be assigned to a layer
 /// </summary>
-public class ScrollingScript : MonoBehaviour
+public class ScrollingScript : MonoBehaviourExtends
 {
+	protected override void OnPause (bool isPaused){}
+
 	/// <summary>
 	/// Scrolling speed
 	/// </summary>
