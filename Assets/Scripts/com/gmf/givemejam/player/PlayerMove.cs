@@ -88,6 +88,8 @@ public class PlayerMove : MonoBehaviourExtends
 
 	protected override void Awake()
 	{	
+		base.Awake();
+
 		_moveDirection = new Vector2();
 
 		_controller    = GetComponent<Rigidbody2D>();
@@ -138,14 +140,16 @@ public class PlayerMove : MonoBehaviourExtends
 
 	protected override void OnPause(bool pause)
 	{
-		if(true)
+		if(pause)
 		{
-			_moveDirection       = _controller.velocity;
-			_controller.velocity = Vector2.zero;
+			_moveDirection       	= _controller.velocity;
+			_controller.velocity 	= Vector2.zero;
+			_controller.isKinematic = true;
 		}
 		else
 		{
-			_controller.velocity = _moveDirection;
+			_controller.isKinematic = false;
+			_controller.velocity 	= _moveDirection;
 		}
 	}
 
