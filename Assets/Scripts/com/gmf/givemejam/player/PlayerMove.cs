@@ -92,6 +92,8 @@ public class PlayerMove :  FlipableObject
 		leftButton.StateChanged += LeftButtonPress;
 
 		rightButton.StateChanged += RightButtonPress;
+
+		bool init = Pause.instance.isPaused;
 	}
 
 	/// <summary>

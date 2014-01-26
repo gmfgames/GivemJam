@@ -24,13 +24,9 @@ public class Pause : MonoBehaviour
 		{
 			get
 			{
-				if(!_instance)
+				if(_instance == null)
 				{
-					GameObject gameObject = new GameObject();
-					gameObject.name = "Pause";
-					gameObject.AddComponent<Pause>();
-
-					_instance = gameObject.GetComponent<Pause>();
+					_instance = GameObject.FindObjectOfType(typeof(Pause)) as Pause;
 				}
 
 				return _instance;
