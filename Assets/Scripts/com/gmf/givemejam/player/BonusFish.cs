@@ -58,4 +58,11 @@ public class BonusFish : TrackingObject {
 			}
 		}
 	}
+
+	public override void Follow (Transform lastTarget)
+	{
+		base.Follow (lastTarget);
+		fishState = FishState.Following;
+
+	}
 }

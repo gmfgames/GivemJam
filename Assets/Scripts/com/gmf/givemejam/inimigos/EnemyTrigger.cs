@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyTrigger : MonoBehaviour {
+public class EnemyTrigger : MonoBehaviourExtends {
+	protected override void OnPause (bool isPaused){	}
 
 	public Inimigo inimigo;
 
-	void OnTriggerEnter2D(Collider2D collider){
-		EnemyKiller enemyKiller = collider.GetComponent<EnemyKiller>();
-		if(enemyKiller && inimigo.enemyState != Inimigo.EnemyState.Done){
-			Obstaculo obstaculo = collider.transform.parent.GetComponent<Obstaculo>();
+	protected virtual void OnTriggerEnter2D(Collider2D _collider){
+		EnemyKiller enemyKiller = _collider.gameObject.GetComponentInChildren<EnemyKiller>();
+		if(enemyKiller != null && inimigo.enemyState != Inimigo.EnemyState.Done){
+			Obstaculo obstaculo = enemyKiller.transform.parent.GetComponentInChildren<Obstaculo>();
 			inimigo.Follow(obstaculo.transform);
 			obstaculo.BeDone();
 		}
