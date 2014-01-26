@@ -41,14 +41,28 @@ public abstract class MonoBehaviourExtends : MonoBehaviour
 			}
 		}
 
-	//------------------------------------------------------------------------------
-	// FUNCTIONS
-	//------------------------------------------------------------------------------
+	/**********************************************************
+	 * FUNÇOES
+	 **********************************************************/ 
+
+	protected virtual void Awake()
+	{
+		MessageDispatcher.AddListener<PauseMessage>(PauseMessage.ON_PAUSE_CHANGED, OnPauseChange);
+	}
 
 	/// <summary>
 	/// Funçao disparada sempre que o jogo for parado ou continuado.
 	/// </summary>
 	/// <param name="pause">Se o jogo for parado <c>true</c>, se o jogo for continuado <c>false</c> .</param>
 	protected abstract void OnPause(bool pause);
+
+	/**********************************************************
+	 * EVENTOS
+	 **********************************************************/ 
+
+	void OnPauseChange (PauseMessage message)
+	{
+		OnPause((message as PauseMessage).paused);
+	}
 }
 

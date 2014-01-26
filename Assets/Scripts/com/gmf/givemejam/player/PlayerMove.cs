@@ -86,7 +86,7 @@ public class PlayerMove : MonoBehaviourExtends
 	 * FUNÇÕES
 	 **********************************************************/ 
 
-	protected void Awake()
+	protected override void Awake()
 	{	
 		_moveDirection = new Vector2();
 
