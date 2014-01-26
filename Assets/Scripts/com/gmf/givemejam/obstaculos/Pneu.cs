@@ -23,6 +23,7 @@ public class Pneu : Obstaculo {
 	}
 
 	void OnCollisionEnter2D(Collision2D _collider){
+		animator.SetTrigger("Bounce");
 		Terreno terreno = _collider.gameObject.GetComponent<Terreno>();
 		if(terreno && !isDone){
 			speed = -speed;
@@ -33,10 +34,8 @@ public class Pneu : Obstaculo {
 		Terreno terreno = _collider.gameObject.GetComponent<Terreno>();
 		if(terreno && isDone && speed < 0){
 			if(collider2D){
-				Debug.Log("Inner");
 				Destroy(collider2D);
 			}
-			Debug.Log("Outer");
 		}
 	}
 }

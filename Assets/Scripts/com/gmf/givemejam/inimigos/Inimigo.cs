@@ -68,10 +68,8 @@ public class Inimigo : TrackingObject {
 		}
 	}
 
-	public void Follow(Transform lastTarget){
-		target = lastTarget;
-		speed *= 4;
+	public override void Follow(Transform lastTarget){
+		base.Follow(lastTarget);
 		enemyState = EnemyState.Done;
-		IsTracking = true;
 	}
 }

@@ -39,4 +39,10 @@ public class TrackingObject : FlipableObject {
 
 	protected override void Start(){
 	}
+
+	public virtual void Follow(Transform lastTarget){
+		target = lastTarget;
+		speed *= 4;
+		IsTracking = true;
+	}
 }
