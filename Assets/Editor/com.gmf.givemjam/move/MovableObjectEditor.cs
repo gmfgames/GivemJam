@@ -115,11 +115,11 @@ public class MovableObjectEditor : Editor
 					
 				currentMove.moveType = (MOVE_TYPE) EditorGUILayout.EnumPopup("Tipo: ", currentMove.moveType);
 
-				if(currentMove.moveType == MOVE_TYPE.FIPLABLE && !(currentMove.move is FiplableMove))
+				if(currentMove.moveType == MOVE_TYPE.FIPLABLE && (!(currentMove.move is FiplableMove) || currentMove.move == null))
 				{
 					currentMove.move = new FiplableMove();
 				}
-				else if(currentMove.moveType == MOVE_TYPE.TRACKING && !(currentMove.move is TrackingMove))
+				else if(currentMove.moveType == MOVE_TYPE.TRACKING && (!(currentMove.move is TrackingMove) || currentMove.move == null))
 				{
 					currentMove.move = new TrackingMove();
 				}

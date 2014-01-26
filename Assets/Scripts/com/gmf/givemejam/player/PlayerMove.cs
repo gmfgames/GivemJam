@@ -8,7 +8,7 @@ using com.gmf.givemejam.move;
 /// <summary>
 /// Moveimentaçao do jogador.
 /// </summary>
-public class PlayerMove :  FlipableObject
+public class PlayerMove :  MovableObject
 {
 	#region Properties 
 	/**********************************************************
