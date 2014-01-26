@@ -6,12 +6,12 @@ public class Inimigo : TrackingObject {
 	protected override void OnPause (bool isPaused){}
 	private Animator animator;
 
-	protected enum EnemyState{
+	public enum EnemyState{
 		Idle,
 		Charging,
 		Done
 	}
-	private EnemyState enemyState = EnemyState.Idle;
+	public EnemyState enemyState = EnemyState.Idle;
 
 
 
@@ -23,6 +23,14 @@ public class Inimigo : TrackingObject {
 	protected override void Start(){
 		IsTracking = false;
 		animator = GetComponent<Animator>();
+	}
+
+	protected override void Update ()
+	{
+		base.Update ();
+		if(enemyState == EnemyState.Done && collider2D){
+			Destroy(collider2D);
+		}
 	}
 
 	protected override void FixedUpdate ()
@@ -56,9 +64,14 @@ public class Inimigo : TrackingObject {
 	void OnCollisionEnter2D(Collision2D collider){
 		PlayerHealth player = collider.gameObject.GetComponent<PlayerHealth>();
 		if(player && enemyState == EnemyState.Charging){
-			target = player.Damage();
-			speed *= 2;
-			enemyState = EnemyState.Done;
+			Follow(player.Damage());
 		}
+	}
+
+	public void Follow(Transform lastTarget){
+		target = lastTarget;
+		speed *= 4;
+		enemyState = EnemyState.Done;
+		IsTracking = true;
 	}
 }

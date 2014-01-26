@@ -2,11 +2,12 @@
 using System.Collections;
 
 [RequireComponent(typeof(Animator))]
-public class Pneu : MonoBehaviourExtends {
+public class Pneu : Obstaculo {
 
 	protected override void OnPause (bool isPaused){}
 
 	public float speed = 5f;
+
 
 	private Animator animator;
 
@@ -15,13 +16,27 @@ public class Pneu : MonoBehaviourExtends {
 	}
 
 	void FixedUpdate(){
-		rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, speed);
+		if(!isDone)
+			rigidbody2D.velocity = new Vector2(0, speed);
+		else
+			rigidbody2D.velocity = new Vector2(0, Mathf.Abs(speed));
 	}
 
-	void OnCollisionEnter2D(Collision2D collider){
-		Terreno terreno = collider.gameObject.GetComponent<Terreno>();
-		if(terreno){
+	void OnCollisionEnter2D(Collision2D _collider){
+		Terreno terreno = _collider.gameObject.GetComponent<Terreno>();
+		if(terreno && !isDone){
 			speed = -speed;
+		}
+	}
+
+	void OnCollisionStay2D(Collision2D _collider){
+		Terreno terreno = _collider.gameObject.GetComponent<Terreno>();
+		if(terreno && isDone && speed < 0){
+			if(collider2D){
+				Debug.Log("Inner");
+				Destroy(collider2D);
+			}
+			Debug.Log("Outer");
 		}
 	}
 }
