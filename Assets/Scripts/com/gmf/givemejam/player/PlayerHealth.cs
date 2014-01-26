@@ -12,10 +12,15 @@ public class PlayerHealth : MonoBehaviourExtends {
 		get{ return fishList.Count; }
 	}
 
-	public void Damage(){
+	public Transform Damage(){
 		if(Life > 1){
-			//TODO zueiras do bagulho de remover life
+			BonusFish fish = fishList.Last().GetComponent<BonusFish>();
+			fish.fishState = BonusFish.FishState.Dying;
+			fishList.Remove(fish.transform);
+			return fish.transform;
 		}else{
+			Debug.Log("Sifu!");
+			return this.transform;
 			//TODO gameover
 		}
 	}

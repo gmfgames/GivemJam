@@ -16,7 +16,7 @@ public class BonusFish : TrackingObject {
 		Dying
 	};
 
-	private FishState _fishState;
+	public FishState _fishState;
 
 	public FishState fishState{
 		get { return _fishState; }
@@ -24,8 +24,19 @@ public class BonusFish : TrackingObject {
 			_fishState = value;
 			if(fishState == FishState.Following)
 				IsTracking = true;
-			else
+			else{
 				IsTracking = false;
+				if(fishState == FishState.Dying)
+					transform.localScale = new Vector3(transform.localScale.x, -transform.localScale.y, transform.localScale.z);
+			}
+		}
+	}
+
+	protected override void FixedUpdate ()
+	{
+		base.FixedUpdate ();
+		if(fishState == FishState.Dying){
+			rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, 3);
 		}
 	}
 
