@@ -8,7 +8,7 @@ public class PlayerBubbleEmitter : MonoBehaviourExtends {
 	public ParticleSystem emitterLeft;
 	public ParticleSystem emitterRight;
 
-	protected override void OnPause(bool isPaused){
+	public override void OnPause(bool isPaused){
 	
 	}
 
