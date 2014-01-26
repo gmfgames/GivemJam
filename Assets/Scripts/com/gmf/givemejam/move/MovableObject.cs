@@ -9,6 +9,7 @@ namespace com.gmf.givemejam.move
 	/// <summary>
 	/// Classe que implementaçao a movimentaçao por <see cref="IMovle"/>.
 	/// </summary>
+	[SerializeField]
 	public abstract class MovableObject : MonoBehaviourExtends
 	{
 		#region Properties 
@@ -31,7 +32,7 @@ namespace com.gmf.givemejam.move
 		#endregion
 
 		#region Funçoes
-		
+
 		/**********************************************************
 		 * FUNÇÕES
 		 **********************************************************/ 

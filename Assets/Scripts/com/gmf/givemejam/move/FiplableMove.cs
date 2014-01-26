@@ -61,9 +61,9 @@ namespace com.gmf.givemejam.move
 
 		#region IMove implementation
 
-		public void FixedMove (Transform transform, Rigidbody2D rigidbody){}
+		public override void FixedMove (Transform transform, Rigidbody2D rigidbody){}
 
-		public void Move (Transform transform, Rigidbody2D rigidbody)
+		public override void Move (Transform transform, Rigidbody2D rigidbody)
 		{
 			if(_currentSide == SIDE.RIGHT && rigidbody.velocity.x < 0)
 

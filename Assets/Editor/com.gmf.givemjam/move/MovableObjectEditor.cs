@@ -26,7 +26,9 @@ public class MovableObjectEditor : Editor
 	/// <summary>
 	/// Lista de movimentos.
 	/// </summary>
-	private MovableObject moveTarget;
+	private SerializedProperty moviments;
+
+	private MovableObject      moveTarget;
 
 	/// <summary>
 	/// Tipos de movimentos.
@@ -55,12 +57,10 @@ public class MovableObjectEditor : Editor
 	void OnEnable()
 	{
 		moveTarget = target as MovableObject;
+		moviments  = serializedObject.FindProperty("moviments");
 
-		if(moveTarget.moviments == null)
 
-			moveTarget.moviments = new List<IMove>();
-
-		movimentsSize = moveTarget.moviments.Count;
+		movimentsSize = moviments.arraySize;
 
 		movimentsType = new List<MoveType>();
 		MoveType currentMove;
@@ -125,6 +125,11 @@ public class MovableObjectEditor : Editor
 				}
 
 				moveTarget.moviments.Add(currentMove.move);
+			}
+
+			for(int j = 0; j < moviments.arraySize; j++)
+			{
+				EditorGUILayout.PropertyField(moviments.GetArrayElementAtIndex(j));
 			}
 		}
 	}
