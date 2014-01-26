@@ -29,9 +29,6 @@ public class Inimigo : TrackingObject {
 	protected override void Update ()
 	{
 		base.Update ();
-		if(enemyState == EnemyState.Done && collider2D){
-			Destroy(collider2D);
-		}
 	}
 
 	protected override void FixedUpdate ()

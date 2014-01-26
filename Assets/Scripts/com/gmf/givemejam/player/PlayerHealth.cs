@@ -27,10 +27,9 @@ public class PlayerHealth : MonoBehaviourExtends {
 			fishList.Remove(fish.transform);
 			return fish.transform;
 		}else{
-			Debug.Log("Sifu!");
-			return this.transform;
-			//TODO gameover
+			Application.LoadLevel(0);
 		}
+		return this.transform;
 	}
 
 	public void AddFish(BonusFish fishzinho){
