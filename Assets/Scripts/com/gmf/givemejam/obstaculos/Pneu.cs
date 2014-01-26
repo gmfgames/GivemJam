@@ -19,10 +19,8 @@ public class Pneu : MonoBehaviourExtends {
 	}
 
 	void OnCollisionEnter2D(Collision2D collider){
-		animator.SetTrigger("Bounce");
 		Terreno terreno = collider.gameObject.GetComponent<Terreno>();
 		if(terreno){
-			Debug.Log ("Boing");
 			speed = -speed;
 		}
 	}

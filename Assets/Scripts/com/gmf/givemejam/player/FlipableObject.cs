@@ -17,8 +17,11 @@ public abstract class FlipableObject : MonoBehaviourExtends {
 			FlipX();
 	}
 
-	protected void FlipX(){
+	protected virtual void FlipX(){
 		IsFacingRight = !IsFacingRight;
 		transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+	}
+	
+	protected virtual void Start(){
 	}
 }

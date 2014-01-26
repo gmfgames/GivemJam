@@ -3,13 +3,9 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-public class BonusFish : FlipableObject {
+public class BonusFish : TrackingObject {
 
 	protected override void OnPause (bool isPaused){}
-
-	public Transform target;
-	public float speed = 3f;
-	public float safeDistance;
 
 	protected Animator animator;
 
@@ -20,12 +16,16 @@ public class BonusFish : FlipableObject {
 		Dying
 	};
 
-	public FishState _fishState;
+	private FishState _fishState;
 
 	public FishState fishState{
 		get { return _fishState; }
 		set { 
 			_fishState = value;
+			if(fishState == FishState.Following)
+				IsTracking = true;
+			else
+				IsTracking = false;
 		}
 	}
 
@@ -35,17 +35,6 @@ public class BonusFish : FlipableObject {
 		fishState = FishState.Waiting;
 
 		animator = GetComponent<Animator>();
-	}
-
-	void FixedUpdate () {
-		if(fishState == FishState.Following){
-			if(Vector3.Distance(transform.position, target.position) > safeDistance){
-				Vector2 direction = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y).normalized;
-				rigidbody2D.velocity = new Vector2(direction.x * speed, direction.y * speed);
-			}else{
-				rigidbody2D.velocity = Vector2.zero;
-			}
-		}
 	}
 
 	void OnTriggerEnter2D(Collider2D collider){
