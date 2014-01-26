@@ -6,7 +6,7 @@ using System.Collections;
 /// </summary>
 public class LevelEnd : MonoBehaviourExtends
 {
-	void OnTriggerEnter(Collision collision)
+	void OnTriggerEnter(Collider collision)
 	{
 		PlayerMove player = collision.gameObject.GetComponent<PlayerMove>();
 
