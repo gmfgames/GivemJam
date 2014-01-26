@@ -21,27 +21,24 @@ public class PlayerMove : MonoBehaviourExtends
 		/// <summary>
 		/// Velocidade do jogador em X.
 		/// </summary>
+		[MultiRangeAttribute(0, 50, "Velocidade em que o personagem vai correr em X")]
 		public float xVelocity;
 
 		/// <summary>
 		/// Velocidade do player em Y.
 		/// </summary>
+		[MultiRangeAttribute(0, 50, "Velocidade em que o personagem vai correr em Y")]
 		public float yVelocity;
-
-		/// <summary>
-		/// Gravidade que sera aplicada ao persongem.
-		/// </summary>
-		public float gravity;
 
 		/// <summary>
 		/// Botao esquerdo do personagem que fara ele andar para esquerda.
 		/// </summary>
-		public TapGesture leftButton;
+		private TapGesture leftButton;
 
 		/// <summary>
 		/// Botao direito do personagem que fara ele andar para a direita.
 		/// </summary>
-		public TapGesture rightButton;
+		private TapGesture rightButton;
 	#endregion
 
 	#region Internas
@@ -95,6 +92,8 @@ public class PlayerMove : MonoBehaviourExtends
 
 		_controller    = GetComponent<Rigidbody2D>();
 
+		CreateButtons();
+
 		if(leftButton)
 
 			leftButton.StateChanged += LeftButtonPress;
@@ -112,7 +111,32 @@ public class PlayerMove : MonoBehaviourExtends
 			throw new UnityException("O botao direito de movimentaçao do personagem nao esta configurado.");
 	}
 
-	public override void onPause(bool pause)
+	private void CreateButtons()
+	{
+		Vector3 cameraPos = Camera.main.transform.position;
+		GameObject button = new GameObject();
+		button.AddComponent<BoxCollider>();
+		button.AddComponent<TapGesture>();
+		button.transform.localScale = new Vector3(12, 12, 1);
+
+		GameObject right = Instantiate(button) as GameObject;
+		right.transform.parent = Camera.main.transform;
+		right.transform.position = new Vector3(cameraPos.x + (right.collider.bounds.size.x / 2) + .2f,
+		                                       cameraPos.y, cameraPos.z + 5) ;
+
+		rightButton = right.GetComponent<TapGesture>();
+
+		GameObject left = Instantiate(button) as GameObject;
+		left.transform.parent = Camera.main.transform;
+		left.transform.position = new Vector3(cameraPos.x - (right.collider.bounds.size.x / 2) - .2f,
+		                                      cameraPos.y, cameraPos.z + 5) ;
+		
+		leftButton = left.GetComponent<TapGesture>();
+
+		Destroy(button);
+	}
+
+	protected override void OnPause(bool pause)
 	{
 		if(true)
 		{
@@ -134,14 +158,14 @@ public class PlayerMove : MonoBehaviourExtends
 
 	void LeftButtonPress (object sender, TouchScript.Events.GestureStateChangeEventArgs e)
 	{
-		if(!isPaused && isEnabled)
+		if(!isPaused && isEnabled && e.State == Gesture.GestureState.Began)
 
 			_controller.velocity = new Vector2(-xVelocity, yVelocity);
 	}
 
 	void RightButtonPress (object sender, TouchScript.Events.GestureStateChangeEventArgs e)
 	{
-		if(!isPaused && isEnabled)
+		if(!isPaused && isEnabled && e.State == Gesture.GestureState.Began)
 
 			_controller.velocity = new Vector2(xVelocity, yVelocity);
 	}
