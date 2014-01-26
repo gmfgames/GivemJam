@@ -11,6 +11,7 @@ public class Inimigo : TrackingObject {
 		Charging,
 		Done
 	}
+
 	public EnemyState enemyState = EnemyState.Idle;
 
 
@@ -41,7 +42,7 @@ public class Inimigo : TrackingObject {
 		}
 	}
 
-	void OnTriggerStay2D(Collider2D collider){
+	protected virtual void OnTriggerStay2D(Collider2D collider){
 		PlayerHealth player = collider.gameObject.GetComponent<PlayerHealth>();
 		if(player && enemyState == EnemyState.Idle){
 			target = player.transform;
@@ -51,7 +52,7 @@ public class Inimigo : TrackingObject {
 		}
 	}
 
-	void OnTriggerExit2D(Collider2D collider){
+	protected virtual void OnTriggerExit2D(Collider2D collider){
 		PlayerHealth player = collider.gameObject.GetComponent<PlayerHealth>();
 		if(player && enemyState == EnemyState.Charging){
 			IsTracking = false;
@@ -61,7 +62,7 @@ public class Inimigo : TrackingObject {
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D collider){
+	protected virtual void OnCollisionEnter2D(Collision2D collider){
 		PlayerHealth player = collider.gameObject.GetComponent<PlayerHealth>();
 		if(player && enemyState == EnemyState.Charging){
 			Follow(player.Damage());
