@@ -1,19 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 using TouchScript.Gestures;
+using com.gmf.givemejam.move;
 
 [RequireComponent (typeof(Rigidbody2D))]
 
 /// <summary>
 /// Moveimentaçao do jogador.
 /// </summary>
-public class PlayerMove : FlipableObject 
+public class PlayerMove :  FlipableObject
 {
 	#region Properties 
 	/**********************************************************
 	 * PROPRIEDADES
 	 **********************************************************/ 
-	#region Externas
+		#region Externas
 		/**------------------------------------------------------------
 		 * EXTERNAS	
 		 **----------------------------------------------------------*/ 
@@ -30,25 +31,12 @@ public class PlayerMove : FlipableObject
 		[MultiRangeAttribute(0, 50, "Velocidade em que o personagem vai correr em Y")]
 		public float yVelocity;
 
-		/// <summary>
-		/// Botao esquerdo do personagem que fara ele andar para esquerda.
-		/// </summary>
-		private TapGesture leftButton;
+		#endregion
 
-		/// <summary>
-		/// Botao direito do personagem que fara ele andar para a direita.
-		/// </summary>
-		private TapGesture rightButton;
-	#endregion
-
-	#region Internas
+		#region Internas
 		/**------------------------------------------------------------
 		 * INTERNAS
 		 **----------------------------------------------------------*/ 
-
-		//////////////////////////////////////////////////
-		// controller
-		////////////////////////////////////////////////
 
 		private Rigidbody2D _controller;
 		/// <summary>
@@ -63,20 +51,25 @@ public class PlayerMove : FlipableObject
 			}
 		}
 		
-		//////////////////////////////////////////////////
-		// moveDirection
-		////////////////////////////////////////////////
-		
 		/// <summary>
 		/// Retorna um <code>Vector2</code> que representa a movimentação do jogador.
 		/// </summary>
 		/// <value>
 		/// As velocidades atuais de movimentação do jogador.
 		/// </value>
-		private Vector2 _moveDirection;
-		
+		private Vector2 _moveDirection;	
 
-	#endregion
+		/// <summary>
+		/// Botao esquerdo do personagem que fara ele andar para esquerda.
+		/// </summary>
+		private TapGesture leftButton;
+		
+		/// <summary>
+		/// Botao direito do personagem que fara ele andar para a direita.
+		/// </summary>
+		private TapGesture rightButton;
+
+		#endregion
 
 	#endregion
 
@@ -96,23 +89,14 @@ public class PlayerMove : FlipableObject
 
 		CreateButtons();
 
-		if(leftButton)
+		leftButton.StateChanged += LeftButtonPress;
 
-			leftButton.StateChanged += LeftButtonPress;
-
-		else
-
-			throw new UnityException("O botao esquerdo de movimentaçao do personagem nao esta configurado.");
-
-		if(rightButton)
-			
-			rightButton.StateChanged += RightButtonPress;
-		
-		else
-			
-			throw new UnityException("O botao direito de movimentaçao do personagem nao esta configurado.");
+		rightButton.StateChanged += RightButtonPress;
 	}
 
+	/// <summary>
+	/// Cria os botoes de movimentaçao do personagem.
+	/// </summary>
 	private void CreateButtons()
 	{
 		Vector3 cameraPos = Camera.main.transform.position;

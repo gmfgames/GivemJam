@@ -14,7 +14,7 @@ public abstract class MonoBehaviourExtends : MonoBehaviour
 		 * PUBLICAS
 		 **----------------------------------------------------------*/ 
 	
-	protected bool _isEnabled = true;
+		protected bool _isEnabled = true;
 		/// <summary>
 		/// Propriedade que indica se o componente esta habilitado ou não.
 		/// </summary>
@@ -48,6 +48,11 @@ public abstract class MonoBehaviourExtends : MonoBehaviour
 	protected virtual void Awake()
 	{
 		MessageDispatcher.AddListener<PauseMessage>(PauseMessage.ON_PAUSE_CHANGED, OnPauseChange);
+	}
+
+	protected virtual void OnDestroy()
+	{
+		MessageDispatcher.RemoveListener<PauseMessage>(PauseMessage.ON_PAUSE_CHANGED, OnPauseChange);
 	}
 
 	/// <summary>
